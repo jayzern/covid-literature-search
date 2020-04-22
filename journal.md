@@ -8,3 +8,10 @@ Hugging Face Models Doc:
 
 Hugging Face Node.js Question Answering Example
 <https://github.com/huggingface/node-question-answering/>
+
+DYNAMIC QUANTIZATION ON BERT
+https://pytorch.org/tutorials/intermediate/dynamic_quantization_bert_tutorial.html
+
+Added:
+node-question-answering.js works
+BERT quantization works
