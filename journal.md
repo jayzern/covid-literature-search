@@ -15,3 +15,6 @@ https://pytorch.org/tutorials/intermediate/dynamic_quantization_bert_tutorial.ht
 Added:
 node-question-answering.js works
 BERT quantization works
+
+TODO: Try Quantization using Tensorflow.js
+https://itnext.io/shrink-your-tensorflow-js-web-model-size-with-weight-quantization-6ddb4fcb6d0d
