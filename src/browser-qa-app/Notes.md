@@ -1,9 +1,13 @@
 ### To start app
+
 For React
+
 ```bash
 yarn start
 ```
+
 Create another bash instance for Flask:
+
 ```bash
 yarn start-api
 ```
@@ -19,6 +23,10 @@ yarn start-api
 2. browser-qa-api contains the Flask app
     - In package.json, `yarn start-api` basically does `cd browser-qa-api && source venv/bin/activate && flask run --no-debugger`
     - Refer to Example.js on how to connecct.
+    - ("start-api": "cd browser-qa-api && source venv/bin/activate && flask run --no-debugger"). Removed source venv/bin/activate for compatibility with running on Windows for testing.
+    - query method:
+        - `/query/<question>`
+        - Takes the provided `question` as an argument and returns top articles using BERT
 3. All other files are useless
 
 ### Command lines used (Useful?)
@@ -32,4 +40,3 @@ yarn add @material-ui/icons
 npm install recharts
 
 yarn add material-ui-icons
-
