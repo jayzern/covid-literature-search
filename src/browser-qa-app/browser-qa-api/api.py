@@ -12,10 +12,12 @@ def create_app():
     @app.route('/time')
     def get_current_time():
         content = {'time': time.time()}
-        return content
+        # Must jsonify before return data
+        return jsonify(content)
 
     @app.route('/query/<question>')
     def query(question):
-        return qa.query(question)
+        answer = qa.query(question)
+        return jsonify(answer)
 
     return app
