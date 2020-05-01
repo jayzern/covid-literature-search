@@ -8,6 +8,7 @@
 
 # pip install nltk
 # pip install textblob
+# python -m textblob.download_corpora
 
 import sys
 from textblob import TextBlob
