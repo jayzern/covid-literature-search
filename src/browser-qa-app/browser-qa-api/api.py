@@ -2,8 +2,10 @@ import time
 from flask import Flask
 from flask import jsonify
 from question_answer import QuestionAnswer
+from question_generator import QuestionGenerator
 
 qa = QuestionAnswer()
+qg = QuestionGenerator()
 
 
 def create_app():
@@ -19,5 +21,12 @@ def create_app():
     def query(question):
         answer = qa.query(question)
         return jsonify(answer)
+
+    # Need to pass string literals
+    # i.e. Coronavirus""disease""(COVID-19)""is""an""infectious""disease""caused""by""a""newly""discovered""coronavirus.
+    @app.route('/rolling_questions/<answer>')
+    def rolling_questions(answer):
+        question_list = qg.parse(answer)
+        return jsonify({'questions': question_list})
 
     return app
