@@ -3,10 +3,12 @@ from flask import Flask
 from flask import jsonify
 from question_answer import QuestionAnswer
 from question_generator import QuestionGenerator
+from text_similarity import TextSimilarity
+
 
 qa = QuestionAnswer()
 qg = QuestionGenerator()
-
+sim = TextSimilarity()
 
 def create_app():
     app = Flask(__name__)
@@ -28,5 +30,12 @@ def create_app():
     def rolling_questions(answer):
         question_list = qg.parse(answer)
         return jsonify({'questions': question_list})
+
+    @app.route('/compute_similarity_example')
+    def compute_similarity_example():
+        sentence1 = "Kim Jong Un Reminds World of Nuclear Threat at Fertilizer Plant"
+        sentence2 = "China has taken a more assertive approach since replacing top officials responsible for Hong Kong earlier this year."
+        score = sim.get_text_similarity(sentence1, sentence2)
+        return jsonify({'score': score})
 
     return app

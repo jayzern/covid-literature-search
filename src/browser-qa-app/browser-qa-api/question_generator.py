@@ -1,19 +1,23 @@
 # Implements a simple Question Generator using Part-of-Speech Tagging
-# TODO: 
+
+# References: https://github.com/indrajithi/genquest
+
+# Installation:
+# pip install nltk
+# pip install textblob
+# python -m textblob.download_corpora
+
+# TODO:
 # - Improve code quality
 # - Add more combinations of POS rules
 # - Add question similarity mechanism using Word Embeddings and Cosine Similarity
 # - Remove Stop Words
-# References: https://github.com/indrajithi/genquest
-
-# pip install nltk
-# pip install textblob
-# python -m textblob.download_corpora
 
 import sys
 from textblob import TextBlob
 from textblob import Word
 import nltk
+
 
 class QuestionGenerator:
     def __init__(self):
@@ -26,12 +30,11 @@ class QuestionGenerator:
         for sentence in text.sentences:
             question_list.append(self.generate_question(sentence))
         return question_list
-            
-    
+
     def generate_question(self, line):
         if isinstance(line, str):
             line = TextBlob(line)
-        
+
         POS = {}
 
         for i, j in enumerate(line.tags):
@@ -76,7 +79,6 @@ class QuestionGenerator:
         l12 = ['NNP', 'NN', 'IN']
         l13 = ['NN', 'VBZ']
 
-
         # 'NNP', 'VBG', 'VBZ', 'IN'
         if all(key in POS for key in l1):
             question = 'What' + ' ' + line.words[POS['VBZ']] + ' ' + \
@@ -113,11 +115,11 @@ class QuestionGenerator:
                 line.words[POS['VBZ']] + ' ' + line.words[POS['NNP']] + '?'
 
         # 'PRP', 'VBZ'
-        elif all(key in POS for key in l11): 
+        elif all(key in POS for key in l11):
             if line.words[POS['PRP']] in ['she', 'he']:
                 question = 'What' + ' does ' + \
                     line.words[POS['PRP']].lower() + ' ' + line.words[POS['VBZ']].singularize() + '?'
-        
+
         # 'NNP', 'VBZ'
         elif all(key in POS for key in l10):
             question = 'What' + ' does ' + \
@@ -136,5 +138,5 @@ class QuestionGenerator:
         if question != '':
             print('\n', 'Question: ' + question)
             return question
-        
+
         return ''
