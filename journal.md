@@ -5,12 +5,13 @@ Week 1
 - [ ] (Tim) Create embeddings dataset by preprocessing articles
 - [ ] (Tim) Get basic model working in Javascript
 - [x] (Jay) Create prototype user interface (React.js, https://material-ui.com/)
- 
+
 Week 2
-- [ ] (Jay) Make app able to process user questions and implement similarity mechanisms.
+- [ ] (Jay) Make app able to process user questions
+- [x] (Jay) implement similarity mechanisms.
 - [ ] (Tim) Multiple answers & confidence scores. (test to make sure it works with test cases)
-- [ ] (Jay) Quantization using Tensorflow.js
-- [ ] (Jay) Start rolling questions
+- [ ] (Jay) 8bit Quantization
+- [x] (Jay) Start rolling questions
  
 Week 3
 - [ ] Could haves (summarization, Read this).
