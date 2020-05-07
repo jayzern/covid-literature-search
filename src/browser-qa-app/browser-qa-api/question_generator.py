@@ -60,7 +60,7 @@ class QuestionGenerator:
         # PRP     Personal pronoun
         # NN  Noun, singular or mass
         # .....................................................................
-
+        
         # Create a list of tag-combination
         l1 = ['NNP', 'VBG', 'VBZ', 'IN']
         l2 = ['NNP', 'VBG', 'VBZ']

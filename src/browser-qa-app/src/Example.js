@@ -26,8 +26,8 @@ export default function Example() {
     return (
     <React.Fragment>
         <Title>Example: Flask API usage</Title>
-        <Typography component="p" variant="h6">
-        <p>Time: {currentTime}.</p>
+        <Typography component={"p"} variant={"h6"}>
+        Time: {currentTime}.
         </Typography>
         <Typography color="textSecondary" className={classes.depositContext}>
         Just a subtitle passing by... don't mind me! :o
