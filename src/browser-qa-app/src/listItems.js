@@ -8,7 +8,9 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import InfoIcon from '@material-ui/icons/Info';
 
 export const mainListItems = (
   <div>
@@ -16,19 +18,19 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Homepage" />
+      <ListItemText primary="Home" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
+        <GitHubIcon />
       </ListItemIcon>
-      <ListItemText primary="Statistics" />
+      <ListItemText primary="Github" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <InfoIcon />
       </ListItemIcon>
-      <ListItemText primary="API Integration" />
+      <ListItemText primary="About" />
     </ListItem>
   </div>
 );
