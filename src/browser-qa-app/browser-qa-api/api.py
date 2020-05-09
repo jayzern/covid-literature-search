@@ -21,6 +21,7 @@ def create_app():
 
     @app.route('/query/<question>')
     def query(question):
+        print(question)
         answer = qa.query(question)
         return jsonify(answer)
 

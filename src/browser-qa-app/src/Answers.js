@@ -133,31 +133,6 @@ export default function Answers() {
           ))}
         </TableBody>
       </Table>
-      
-      {/* TODO: Delete later (old code) */}
-      {/* <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Paragraph:</TableCell>
-            <TableCell>Paper ID:</TableCell>
-            <TableCell>Title:</TableCell>
-            <TableCell>Abstract:</TableCell>
-            <TableCell align="right">Score:</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.paragraph}</TableCell>
-              <TableCell>{row.paper_id}</TableCell>
-              <TableCell>{row.title}</TableCell>
-              <TableCell >{row.abstract}</TableCell>
-              <TableCell align="right">{row.score}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table> */}
-
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
           More...

@@ -23,7 +23,7 @@ import { mainListItems, secondaryListItems } from './listItems';
 
 // Add more components
 import Chart from './Chart';
-import Question from './Question';
+import QuestionAnswer from './QuestionAnswer';
 import Answers from './Answers';
 import Example from './Example';
 
@@ -181,27 +181,27 @@ export default function Dashboard() {
             {/* Question */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Question />
+                <QuestionAnswer />
               </Paper>
             </Grid>
             {/* Answers */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Answers />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Flask API example */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Example />
               </Paper>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Box pt={4}>
             <Copyright />
