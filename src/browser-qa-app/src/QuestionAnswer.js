@@ -171,12 +171,12 @@ export default function QuestionAnswer() {
         </TableBody>
       </Table>
 
-      <Plot
+      {/* <Plot
         data={[
           {type: 'bar', x: ["[CLS]", "[SEP]", "Tokens"], y: [2, 5, 3]},
         ]}
         layout={ {width: 720, height: 300, title: 'A Fancy Plot'} }
-      />
+      /> */}
     </React.Fragment>
     );
 }
