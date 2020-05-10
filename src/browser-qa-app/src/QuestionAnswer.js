@@ -7,6 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Plot from 'react-plotly.js';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -91,8 +92,24 @@ export default function QuestionAnswer() {
       });
     }
 
+    function updateVisuals(question, context) {
+      fetch('/visualize', {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(json => {
+        console.log(json)
+      });
+    }
+
+
     const [suggestions, setSuggestions] = useState([
-      'Tell me about the symptoms of Covid-19'
+      'Bayesian Inference for Covid-19'
     ]);
 
     const [data, setData] = useState([
@@ -118,6 +135,9 @@ export default function QuestionAnswer() {
       </form>
       <Link color="primary" onClick={handleSubmit}>
         Ask
+      </Link>
+      <Link color="primary" onClick={updateVisuals}>
+        Test Button
       </Link>
       <br/>
       <Title>Suggestions</Title>
@@ -150,6 +170,13 @@ export default function QuestionAnswer() {
           ))}
         </TableBody>
       </Table>
+
+      <Plot
+        data={[
+          {type: 'bar', x: ["[CLS]", "[SEP]", "Tokens"], y: [2, 5, 3]},
+        ]}
+        layout={ {width: 720, height: 300, title: 'A Fancy Plot'} }
+      />
     </React.Fragment>
     );
 }

@@ -10,8 +10,10 @@
         "@testing-library/user-event": "^7.2.1",
         "material-table": "^1.57.2",
         "material-ui-icons": "^1.0.0-beta.36",
+        "plotly.js": "^1.54.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-plotly.js": "^2.4.0",
         "react-scripts": "3.4.1",
         "recharts": "^1.8.5"
     },
