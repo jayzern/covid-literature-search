@@ -1,6 +1,5 @@
 import React, {useState}  from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
 import Title from './Title';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,107 +11,19 @@ import Plot from 'react-plotly.js';
 function preventDefault(event) {
     event.preventDefault();
 }
-  
-const useStyles = makeStyles({
-    depositContext: {
-        flex: 1,
-    },
-});
 
 export default function QuestionAnswer() {
-
     // Functional Component using States
     // https://stackoverflow.com/questions/46821699/react-functional-component-using-state/53780465
 
-    const classes = useStyles();
+    // Reference for text input
     const input = React.createRef();
 
-    function handleSubmit(event) {
-      preventDefault(event);
-      const question = input.current.value;
-      updateAnswers(question);
-    }
-
-    function handleClick(event) {
-      let question = event.target.value;
-      updateAnswers(question);
-    }
-
-    function updateAnswers(question) {
-      fetch('/query/'+question, {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      })
-      .then(response => {
-        return response.json()
-      })
-      .then(json => {
-        let newData = [];
-        let context = "";
-        let i;
-        for (i = 0; i < 5; i++) {
-          let row = {
-            id: i,
-            score: json.score[i],
-            paragraph: json.paragraph[i],
-            paper_id: json.url[i],
-            title: json.title[i],
-            abstract: json.abstract[i]
-          }
-          newData.push(row);
-          context = context + ". " + json.abstract[i];
-        }
-        setData(newData);
-        updateSuggestions(context)
-      })
-    }
-
-    function updateSuggestions(context) {
-      fetch('/rolling_questions/' + context, {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      })
-      .then(response => {
-        return response.json()
-      })
-      .then(json => {
-        console.log(json)
-        let j;
-        let newSuggestions = [];
-        for (j = 0; j < 5; j++) {
-          if (json.questions[j] != "") {
-            newSuggestions.push(json.questions[j]);
-          }
-        }
-        setSuggestions(newSuggestions);
-      });
-    }
-
-    function updateVisuals(question, context) {
-      fetch('/visualize', {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      })
-      .then(response => {
-        return response.json()
-      })
-      .then(json => {
-        console.log(json)
-      });
-    }
-
-
-    const [suggestions, setSuggestions] = useState([
-      'Bayesian Inference for Covid-19'
-    ]);
-
-    const [data, setData] = useState([
+    // Default placeholder values
+    const [keywords, setKeywords] = useState(["[CLS]", "[SEP]", "Tokens", "Comma"]);
+    const [scores, setScores] = useState([2, 5, 3, 10]);
+    const [suggestions, setSuggestions] = useState(['Coronavirus']);
+    const [answers, setAnswers] = useState([
       {
         id: 0,
         score: 0.8452, 
@@ -123,6 +34,102 @@ export default function QuestionAnswer() {
       }
     ]);
 
+    function handleSubmit(event) {
+      preventDefault(event); // avoids refreshing page after submit
+      updateAnswers(input.current.value);
+    }
+
+    function handleClick(event) {
+      // Only update answers when u click a button
+      if (event.target.value){
+        updateAnswers(event.target.value);
+      }
+    }
+
+    function updateAnswers(input) {
+      const headers = {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      }
+      fetch('/query/'+input, headers)
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          let newAnswers = [];
+          let context = "";
+          let i;
+          for (i = 0; i < 5; i++) {
+            let row = {
+              id: i,
+              score: json.score[i],
+              paragraph: json.paragraph[i],
+              paper_id: json.url[i],
+              title: json.title[i],
+              abstract: json.abstract[i]
+            }
+            newAnswers.push(row);
+            context = context + ". " + json.abstract[i];
+          }
+          // Update Answers in the tables
+          setAnswers(newAnswers);
+          // Update suggestions based on context
+          updateSuggestions(context);
+          // Update keywords based on question and context
+          updateKeywords(input, context);
+        })
+    }
+
+    function updateSuggestions(context) {
+      // TODO: Fix me later
+      // Suggestions User interface problem
+      // Sometimes when we get empty suggestions => unique key error because the
+      // current keys are just the text values.
+      const headers = {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      }
+      fetch('/rolling_questions/' + context, headers)
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          console.log(json)
+          let j;
+          let newSuggestions = [];
+          for (j = 0; j < 5; j++) {
+            if (json.questions[j] != "") {
+              newSuggestions.push(json.questions[j]);
+            }
+          }
+          setSuggestions(newSuggestions);
+        });
+    }
+
+    function updateKeywords(question, context) {
+      console.log(question)
+      console.log(context)
+      fetch('/visualize/' + question + '/' + context, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(json => {
+        console.log(json)
+        setKeywords(json.keywords)
+        setScores(json.scores)
+      });
+    }
+
+
     return (
     <React.Fragment>
       <Title>Question</Title>
@@ -130,25 +137,36 @@ export default function QuestionAnswer() {
         <input
           type="text"
           ref={input}
-          onClick={handleSubmit}
         />
       </form>
       <Link color="primary" onClick={handleSubmit}>
         Ask
       </Link>
-      <Link color="primary" onClick={updateVisuals}>
-        Test Button
-      </Link>
+
       <br/>
+
       <Title>Suggestions</Title>
-      {suggestions.map((question) => (
+      {suggestions.map((suggestion) => (
         <input
+        key={suggestion}
         type="button"
-        value={question}
+        value={suggestion}
         onClick={e => handleClick(e, "value")}
         />
       ))}
+
       <br/>
+
+      <Title>Keywords</Title>
+      <Plot
+        data={[
+          {type: 'bar', x: keywords, y: scores},
+        ]}
+        layout={ {width: 1080, height: 256, title: 'Scores'} }
+      />
+
+      <br/>
+
       <Title>Answers</Title>
       <Table size="small">
         <TableHead>
@@ -160,7 +178,7 @@ export default function QuestionAnswer() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {answers.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.score}</TableCell>
               <TableCell>{row.paragraph}</TableCell>
@@ -170,13 +188,6 @@ export default function QuestionAnswer() {
           ))}
         </TableBody>
       </Table>
-
-      {/* <Plot
-        data={[
-          {type: 'bar', x: ["[CLS]", "[SEP]", "Tokens"], y: [2, 5, 3]},
-        ]}
-        layout={ {width: 720, height: 300, title: 'A Fancy Plot'} }
-      /> */}
     </React.Fragment>
     );
 }

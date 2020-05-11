@@ -5,8 +5,11 @@ import pandas as pd
 
 class VisualizeKeywords:
     def __init__(self):
-        self.model = BertForQuestionAnswering.from_pretrained('./model/3_BERT_squad/')
-        self.tokenizer = BertTokenizer.from_pretrained('./model/3_BERT_squad/')
+        self.model = BertForQuestionAnswering.from_pretrained(
+            './model/3_BERT_squad/')
+        self.tokenizer = BertTokenizer.from_pretrained(
+            './model/3_BERT_squad/')
+        self.NUM_TOKENS = 25
 
     def get_scores(self, question, answer_text):
         input_ids = self.tokenizer.encode(question, answer_text)
@@ -25,8 +28,10 @@ class VisualizeKeywords:
 
         # Run our example through the model.
         start_scores, end_scores = self.model(
-            torch.tensor([input_ids]), # The tokens representing our input text.
-            token_type_ids=torch.tensor([segment_ids])) # The segment IDs to differentiate question from answer_text
+            # The tokens representing our input text.
+            torch.tensor([input_ids]),
+            # The segment IDs to differentiate question from answer_text
+            token_type_ids=torch.tensor([segment_ids])) 
 
         # Find the tokens with the highest `start` and `end` scores.
         answer_start = torch.argmax(start_scores)
@@ -34,8 +39,6 @@ class VisualizeKeywords:
 
         # Combine the tokens in the answer and print it out.
         answer = ' '.join(tokens[answer_start:answer_end+1])
-
-        # print('Answer: "' + answer + '"')
 
         # Pull the scores out of PyTorch Tensors and convert them to 1D numpy arrays.
         s_scores = start_scores.detach().numpy().flatten()
@@ -48,13 +51,13 @@ class VisualizeKeywords:
         df = pd.DataFrame({
             'tokens': token_labels,
             'start': s_scores,
-            'end': e_scores,
         })
 
-        return df.to_json(orient='records')
-        
-        # sorted_df = df.sort_values(by=['start'], ascending=False)
+        # Sort by starting tokens
+        df = df.sort_values(by=['start'], ascending=False)
 
-        # top_sorted_df = sorted_df[1:20]
+        # Get top 25 tokens
+        df = df[:self.NUM_TOKENS]
 
-        # print(top_sorted_df.to_json(orient='records'))
+        return {'keywords': df['tokens'].tolist(), 
+                'scores': df['start'].tolist()}

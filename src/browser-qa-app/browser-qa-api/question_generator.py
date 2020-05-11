@@ -74,10 +74,6 @@ class QuestionGenerator:
         l8 = ['NNP', 'VBZ', 'JJ']
         l9 = ['NNP', 'VBZ', 'NN']
 
-        l10 = ['NNP', 'VBZ']
-        l11 = ['PRP', 'VBZ']
-        l12 = ['NNP', 'NN', 'IN']
-        l13 = ['NN', 'VBZ']
 
         # 'NNP', 'VBG', 'VBZ', 'IN'
         if all(key in POS for key in l1):
@@ -113,22 +109,6 @@ class QuestionGenerator:
         elif all(key in POS for key in l9):
             question = 'What' + ' ' + \
                 line.words[POS['VBZ']] + ' ' + line.words[POS['NNP']] + '?'
-
-        # 'PRP', 'VBZ'
-        elif all(key in POS for key in l11):
-            if line.words[POS['PRP']] in ['she', 'he']:
-                question = 'What' + ' does ' + \
-                    line.words[POS['PRP']].lower() + ' ' + line.words[POS['VBZ']].singularize() + '?'
-
-        # 'NNP', 'VBZ'
-        elif all(key in POS for key in l10):
-            question = 'What' + ' does ' + \
-                line.words[POS['NNP']] + ' ' + line.words[POS['VBZ']].singularize() + '?'
-
-        # 'NN', 'VBZ'
-        elif all(key in POS for key in l13):
-            question = 'What' + ' ' + \
-                line.words[POS['VBZ']] + ' ' + line.words[POS['NN']] + '?'
 
         # When the tags are generated 's is split to ' and s. To overcome this
         # issue.
