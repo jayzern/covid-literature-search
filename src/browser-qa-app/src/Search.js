@@ -145,7 +145,8 @@ export default function Search() {
                 <TableBody>
                     {answers.map((row) => (
                         <TableRow key={row.id}>
-                            <TableCell>{row.score}</TableCell>
+                            {/* Round up to 5 decimal places */}
+                            <TableCell>{row.score.toFixed(5)}</TableCell>
                             <TableCell>{row.url}</TableCell>
                             <TableCell>{row.title}</TableCell>
                             <TableCell>{row.abstract}</TableCell>
