@@ -13,7 +13,7 @@ const theme = createMuiTheme({
     palette: {
         primary: orange, // For components
         inherit: grey, // For text
-        secondary: { // To blend with orange
+        secondary: {
             main: "#ffffff" // white
         },
     }

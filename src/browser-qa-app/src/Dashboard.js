@@ -27,10 +27,10 @@ function Copyright() {
     return (
         <Typography variant="body2" color="inherit" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            {/* <Link color="inherit" href="https://material-ui.com/">
                 COMS W4995 Applied Deep Learning Spring 2020
-            </Link>{' '}
-            {/* {new Date().getFullYear()} */}
+            </Link>{' '} */}
+            COMS W4995 Applied Deep Learning Spring 2020
             {'.'}
         </Typography>
     );

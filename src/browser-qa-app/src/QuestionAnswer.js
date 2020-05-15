@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './QuestionAnswer.css';
-// import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -23,14 +23,13 @@ export default function QuestionAnswer() {
     const loading = React.createRef();
 
     // Default placeholder values
-    const [keywords, setKeywords] = useState([
-        '[CLS]',
-        '[SEP]',
-        'Tokens',
-        'Comma',
+    const [keywords, setKeywords] = useState([]);
+    const [scores, setScores] = useState([]);
+    const [suggestions, setSuggestions] = useState([
+        'What are the symptoms of COVID-19?',
+        'The economic effects of a pandemic',
+        'Bayesian inference for emerging infectious diseases'
     ]);
-    const [scores, setScores] = useState([2, 5, 3, 10]);
-    const [suggestions, setSuggestions] = useState(['Coronavirus', 'Economic Impact on Lockdowns']);
     const [answers, setAnswers] = useState([
         {
             id: 0,
@@ -44,7 +43,7 @@ export default function QuestionAnswer() {
     ]);
 
     function handleSubmit(event) {
-        if (input.current.value.length == 0) {
+        if (input.current.value.length === 0) {
             console.log('no input');
             input.current.style.borderColor = 'darkred';
             return;
@@ -92,35 +91,15 @@ export default function QuestionAnswer() {
                 // Update Answers in the tables
                 setAnswers(newAnswers);
 
-                // Update suggestions based on context
+                // Update suggestions
                 setSuggestions(json.suggestions);
 
-                // Update keywords based on question and context
-
-                // TODO: Uncomment and fix this
-                // updateKeywords(input, context);
+                // Update keywords
+                setKeywords(json.keywords);
+                setScores(json.scores);
 
                 // TODO: Fix this
                 // loading.current.style.opacity = 0;
-            });
-    }
-
-    function updateKeywords(question, context) {
-        // console.log(question);
-        // console.log(context);
-        fetch('/visualize/' + question + '/' + context, {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-        })
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                console.log(json);
-                setKeywords(json.keywords);
-                setScores(json.scores);
             });
     }
 
@@ -150,14 +129,6 @@ export default function QuestionAnswer() {
             <br />
             <br />
 
-            <Title>Keywords</Title>
-            {/* <Plot
-                data={[{ type: 'bar', x: keywords, y: scores }]}
-                layout={{ width: 1080, height: 256, title: 'Scores' }}
-            /> */}
-
-            <br />
-            <br />
 
             <Title>Answers</Title>
             <Table size="small">
@@ -196,6 +167,32 @@ export default function QuestionAnswer() {
                     />
                 </div>
             ))}
+
+            <br />
+            <br />
+
+            <Title>Keywords</Title>
+            {/* Center the plot */}
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+            <Plot
+                data={[{ type: 'bar', x: keywords, y: scores , marker: {color: 'lightgrey'}}]}
+                layout={{ 
+                    width: 1024, 
+                    height: 400, 
+                    title: 'Word importance',
+                    xaxis: {
+                        title: 'Tokens'
+                    },
+                    yaxis: {
+                        title: 'Score'
+                    }
+            }}
+            />
+            </div>
 
             <br />
             <br />
