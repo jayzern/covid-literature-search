@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 
 import orange from '@material-ui/core/colors/orange';
 import grey from '@material-ui/core/colors/grey';
-import { MuiThemeProvider, createMuiTheme, withTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
     palette: {

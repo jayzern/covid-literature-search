@@ -1,17 +1,9 @@
-# Implements a simple Question Generator using Part-of-Speech Tagging
-
 # References: https://github.com/indrajithi/genquest
 
-# Installation:
+# Installation Instructions:
 # pip install nltk
 # pip install textblob
 # python -m textblob.download_corpora
-
-# TODO:
-# - Improve code quality
-# - Add more combinations of POS rules
-# - Add question similarity mechanism using Word Embeddings and Cosine Similarity
-# - Remove Stop Words
 
 import sys
 from textblob import TextBlob
@@ -19,16 +11,19 @@ from textblob import Word
 import nltk
 
 
-class QuestionGenerator:
+class POS_Tagging:
     def __init__(self):
-        # TODO: implement NER and BoW later
         self.BoW = {}
 
     def parse(self, answer):
         text = TextBlob(answer)
+
         question_list = []
+
+        # Generate questions based on sentences
         for sentence in text.sentences:
             question_list.append(self.generate_question(sentence))
+        
         return question_list
 
     def generate_question(self, line):
@@ -40,11 +35,6 @@ class QuestionGenerator:
         for i, j in enumerate(line.tags):
             if j[1] not in POS:
                 POS[j[1]] = i
-
-        print('\n', '-' * 20)
-        print(line, '\n')
-        print("TAGS:", line.tags, '\n')
-        print(POS)
 
         question = ""
 
@@ -116,7 +106,6 @@ class QuestionGenerator:
             question = question.replace(" ’ ", "'s ")
 
         if question != '':
-            print('\n', 'Question: ' + question)
             return question
 
         return ''

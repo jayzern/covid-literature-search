@@ -75,56 +75,33 @@ export default function QuestionAnswer() {
             })
             .then((json) => {
                 let newAnswers = [];
-                let context = '';
+                // let context = '';
+                let context = [];
                 let i;
                 for (i = 0; i < 5; i++) {
                     let row = {
                         id: i,
-                        score: json.score[i],
-                        url: json.url[i],
-                        title: json.title[i],
-                        abstract: json.abstract[i],
+                        score: json.answer.score[i],
+                        url: json.answer.url[i],
+                        title: json.answer.title[i],
+                        abstract: json.answer.abstract[i],
                     };
                     newAnswers.push(row);
-                    context = context + '. ' + json.abstract[i];
+                    context.push(row.abstract);
                 }
                 // Update Answers in the tables
                 setAnswers(newAnswers);
+
                 // Update suggestions based on context
-                updateSuggestions(context);
+                setSuggestions(json.suggestions);
+
                 // Update keywords based on question and context
-                updateKeywords(input, context);
+
+                // TODO: Uncomment and fix this
+                // updateKeywords(input, context);
 
                 // TODO: Fix this
                 // loading.current.style.opacity = 0;
-            });
-    }
-
-    function updateSuggestions(context) {
-        // TODO: Fix me later
-        // Suggestions User interface problem
-        // Sometimes when we get empty suggestions => unique key error because the
-        // current keys are just the text values.
-        const headers = {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-        };
-        fetch('/rolling_questions/' + context, headers)
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                console.log(json);
-                let j;
-                let newSuggestions = [];
-                for (j = 0; j < 5; j++) {
-                    if (json.questions[j] != '') {
-                        newSuggestions.push(json.questions[j]);
-                    }
-                }
-                setSuggestions(newSuggestions);
             });
     }
 
