@@ -7,14 +7,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import './QuestionAnswer.css';
+import './Search.css';
 import Plot from 'react-plotly.js';
 
 function preventDefault(event) {
     event.preventDefault();
 }
 
-export default function QuestionAnswer() {
+export default function Search() {
     // Functional Component using States
     // https://stackoverflow.com/questions/46821699/react-functional-component-using-state/53780465
 

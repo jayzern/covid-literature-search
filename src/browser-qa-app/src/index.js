@@ -21,8 +21,6 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
     <React.StrictMode>
-        {/* <App /> */}
-
         {/* Add Theme */}
         <MuiThemeProvider theme={theme}>
             <Dashboard />

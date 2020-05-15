@@ -12,7 +12,7 @@ NUM_CLOSEST = 5
 NUM_BATCH_EMBEDDINGS = 4
 
 
-class QuestionAnswer:
+class SentenceEmbeddings:
     def __init__(self):
         self.embedder = SentenceTransformer(MODEL_DIR)
         self.batch_embeddings = None

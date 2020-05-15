@@ -14,14 +14,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './listItems';
 
 // Add more components
-import QuestionAnswer from './QuestionAnswer';
+import Search from './Search';
 
 function Copyright() {
     return (
@@ -161,12 +161,6 @@ export default function Dashboard() {
                             COVID Literature Search
                         </Box>
                     </Typography>
-                    {/* Optional Icon Button on the Top RHS */}
-                    {/* <IconButton color="inherit">
-            <Badge badgeContent={99} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton> */}
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -186,37 +180,16 @@ export default function Dashboard() {
                 </div>
                 <Divider />
                 <List>{mainListItems}</List>
-                {/* <Divider /> */}
-                {/* <List>{secondaryListItems}</List> */}
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        {/* Question */}
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
-                                <QuestionAnswer />
+                                <Search />
                             </Paper>
                         </Grid>
-                        {/* Answers */}
-                        {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Answers />
-              </Paper>
-            </Grid> */}
-                        {/* Chart */}
-                        {/* <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid> */}
-                        {/* Flask API example */}
-                        {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Example />
-              </Paper>
-            </Grid> */}
                     </Grid>
                     <Box pt={4}>
                         <Copyright />

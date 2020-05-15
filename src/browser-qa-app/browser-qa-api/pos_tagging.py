@@ -1,5 +1,4 @@
 # References: https://github.com/indrajithi/genquest
-
 # Installation Instructions:
 # pip install nltk
 # pip install textblob
@@ -64,6 +63,11 @@ class POS_Tagging:
         l8 = ['NNP', 'VBZ', 'JJ']
         l9 = ['NNP', 'VBZ', 'NN']
 
+        l10 = ['NNP', 'VBZ']
+        l11 = ['PRP', 'VBZ']
+        l13 = ['NN', 'VBZ']
+
+
 
         # 'NNP', 'VBG', 'VBZ', 'IN'
         if all(key in POS for key in l1):
@@ -99,6 +103,22 @@ class POS_Tagging:
         elif all(key in POS for key in l9):
             question = 'What' + ' ' + \
                 line.words[POS['VBZ']] + ' ' + line.words[POS['NNP']] + '?'
+
+        #'NNP', 'VBZ' in sentence.
+        elif all(key in POS for key in l10): 
+            question = 'What' + ' does ' + line.words[POS['NNP']] + ' ' + \
+                        line.words[POS['VBZ']].singularize() + '?'
+
+        #'PRP', 'VBZ' in sentence.
+        elif all(key in POS for key in l11): 
+            if line.words[POS['PRP']] in ['she','he']:
+                question = 'What' + ' does ' + line.words[POS['PRP']].lower() \
+                            + ' ' + line.words[POS['VBZ']].singularize() + '?'
+
+        #'NN', 'VBZ' in sentence.
+        elif all(key in POS for key in l13): 
+            question = 'What' + ' ' + line.words[POS['VBZ']] + ' ' + \
+                        line.words[POS['NN']] + '?'
 
         # When the tags are generated 's is split to ' and s. To overcome this
         # issue.

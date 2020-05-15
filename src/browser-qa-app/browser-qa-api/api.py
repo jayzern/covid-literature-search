@@ -2,27 +2,21 @@ import time
 import random
 from flask import Flask
 from flask import jsonify
-from question_answer import QuestionAnswer
+from sentence_embeddings import SentenceEmbeddings
 from pos_tagging import POS_Tagging
 from tf_idf import TF_IDF
 
-qa = QuestionAnswer()
+sentence_embeddings = SentenceEmbeddings()
 pos_tagging = POS_Tagging()
 tfidf = TF_IDF()
 
 def create_app():
     app = Flask(__name__)
 
-    @app.route('/time')
-    def get_current_time():
-        content = {'time': time.time()}
-        # Must jsonify before return data
-        return jsonify(content)
-
     @app.route('/query/<question>')
     def query(question):
         # Generate search results using sentence embeddings
-        answer = qa.query(question)
+        answer = sentence_embeddings.query(question)
 
         # Generate context using answer.
         context = []
