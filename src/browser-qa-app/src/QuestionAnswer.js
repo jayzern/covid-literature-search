@@ -30,7 +30,7 @@ export default function QuestionAnswer() {
         'Comma',
     ]);
     const [scores, setScores] = useState([2, 5, 3, 10]);
-    const [suggestions, setSuggestions] = useState(['Coronavirus']);
+    const [suggestions, setSuggestions] = useState(['Coronavirus', 'Economic Impact on Lockdowns']);
     const [answers, setAnswers] = useState([
         {
             id: 0,
@@ -95,7 +95,8 @@ export default function QuestionAnswer() {
                 // Update keywords based on question and context
                 updateKeywords(input, context);
 
-                loading.current.style.opacity = 0;
+                // TODO: Fix this
+                // loading.current.style.opacity = 0;
             });
     }
 
@@ -128,8 +129,8 @@ export default function QuestionAnswer() {
     }
 
     function updateKeywords(question, context) {
-        console.log(question);
-        console.log(context);
+        // console.log(question);
+        // console.log(context);
         fetch('/visualize/' + question + '/' + context, {
             headers: {
                 'Content-Type': 'application/json',
@@ -210,9 +211,8 @@ export default function QuestionAnswer() {
 
             <Title>Suggestions</Title>
             {suggestions.map((suggestion) => (
-                <div className="btn-suggestion">
+                <div className="btn-suggestion" key={suggestion}>
                     <input
-                        key={suggestion}
                         type="button"
                         value={suggestion}
                         onClick={(e) => handleClick(e, 'value')}

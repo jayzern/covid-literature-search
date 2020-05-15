@@ -71,7 +71,8 @@
     border: 0.1rem solid lightgray;
     text-align: center;
     max-width: 100%;
-    margin: 2rem 0;
+    /* margin: 2rem 0; */
+    margin: 0.5rem 0;
     padding: 1rem;
     border-radius: 0.2rem;
     cursor: pointer;
