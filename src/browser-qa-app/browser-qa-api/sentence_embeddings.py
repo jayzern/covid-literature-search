@@ -1,5 +1,6 @@
 import h5py
 import pickle as pkl
+import torch
 import numpy as np
 import scipy.spatial
 from sentence_transformers import SentenceTransformer
@@ -14,7 +15,22 @@ NUM_BATCH_EMBEDDINGS = 4
 
 class SentenceEmbeddings:
     def __init__(self):
-        self.embedder = SentenceTransformer(MODEL_DIR)
+        MODEL_NAME = 'gsarti/covidbert-nli'
+        word_embedding_model = models.BERT(MODEL_NAME,
+                                           max_seq_length=510,
+                                           do_lower_case=True)
+
+        pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension(),
+                                       pooling_mode_mean_tokens=True,
+                                       pooling_mode_cls_token=False,
+                                       pooling_mode_max_tokens=False)
+
+        model = SentenceTransformer(
+            modules=[word_embedding_model, pooling_model])
+
+        self.embedder = torch.quantization.quantize_dynamic(
+            model, {torch.nn.Linear}, dtype=torch.qint8)
+
         self.batch_embeddings = None
         self.lookup = None
         self.load_data()
@@ -39,9 +55,9 @@ class SentenceEmbeddings:
             index += batch.shape[0]
             # only keep top results every batch
             results = sorted(results, key=lambda x: x[1])[:NUM_CLOSEST]
-    
+
         print(results)
-        
+
         return self.format_results(results)
 
     def format_results(self, results):
