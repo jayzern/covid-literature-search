@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './Search.css';
-// import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -99,7 +99,7 @@ export default function Search() {
                 setScores(json.scores);
 
                 // TODO: Fix this
-                loading.current.style.opacity = 0;
+                // loading.current.style.opacity = 0;
             });
     }
 
@@ -176,7 +176,7 @@ export default function Search() {
                     justifyContent: 'center',
                 }}
             >
-                {/* <Plot
+                <Plot
                     data={[
                         {
                             type: 'bar',
@@ -196,7 +196,7 @@ export default function Search() {
                             title: 'Score',
                         },
                     }}
-                /> */}
+                />
             </div>
 
             <br />

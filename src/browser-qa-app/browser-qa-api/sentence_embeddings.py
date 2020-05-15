@@ -1,5 +1,4 @@
 import h5py
-import re
 import pickle as pkl
 import numpy as np
 import scipy.spatial
@@ -27,7 +26,7 @@ class SentenceEmbeddings:
             self.lookup = pkl.load(f)
 
     def query(self, question):
-        question = [re.sub(r'[^a-zA-z0-9\s]', '', question).lower()]
+        # query = [re.sub(r'[^a-zA-z0-9\s]', '', query).lower()]
         query_embedding = np.array(self.embedder.encode(
             [question], show_progress_bar=False))
 
@@ -40,7 +39,9 @@ class SentenceEmbeddings:
             index += batch.shape[0]
             # only keep top results every batch
             results = sorted(results, key=lambda x: x[1])[:NUM_CLOSEST]
-
+    
+        print(results)
+        
         return self.format_results(results)
 
     def format_results(self, results):

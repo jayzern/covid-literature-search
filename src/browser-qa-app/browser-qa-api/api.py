@@ -18,6 +18,8 @@ def create_app():
         # Generate search results using sentence embeddings
         answer = sentence_embeddings.query(question)
 
+        # print(answer)
+
         # Generate context using answer.
         context = []
         for doc in answer['abstract']:
