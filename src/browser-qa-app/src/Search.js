@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './Search.css';
-import Plot from 'react-plotly.js';
+// import Plot from 'react-plotly.js';
 
 function preventDefault(event) {
     event.preventDefault();
@@ -28,7 +28,7 @@ export default function Search() {
     const [suggestions, setSuggestions] = useState([
         'What are the symptoms of COVID-19?',
         'The economic effects of a pandemic',
-        'Bayesian inference for emerging infectious diseases'
+        'Bayesian inference for emerging infectious diseases',
     ]);
     const [answers, setAnswers] = useState([
         {
@@ -99,7 +99,7 @@ export default function Search() {
                 setScores(json.scores);
 
                 // TODO: Fix this
-                // loading.current.style.opacity = 0;
+                loading.current.style.opacity = 0;
             });
     }
 
@@ -117,18 +117,13 @@ export default function Search() {
                         Enter
                     </Link>
                     <div id="loading" ref={loading}>
-                        <CircularProgress
-                            id="asdf"
-                            size="2rem"
-                            color="secondary"
-                        />
+                        <CircularProgress size="2rem" />
                     </div>
                 </div>
             </form>
 
             <br />
             <br />
-
 
             <Title>Answers</Title>
             <Table size="small">
@@ -174,25 +169,34 @@ export default function Search() {
 
             <Title>Keywords</Title>
             {/* Center the plot */}
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-            <Plot
-                data={[{ type: 'bar', x: keywords, y: scores , marker: {color: 'lightgrey'}}]}
-                layout={{ 
-                    width: 1024, 
-                    height: 400, 
-                    title: 'Word importance',
-                    xaxis: {
-                        title: 'Tokens'
-                    },
-                    yaxis: {
-                        title: 'Score'
-                    }
-            }}
-            />
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                {/* <Plot
+                    data={[
+                        {
+                            type: 'bar',
+                            x: keywords,
+                            y: scores,
+                            marker: { color: 'lightgrey' },
+                        },
+                    ]}
+                    layout={{
+                        width: 1024,
+                        height: 400,
+                        title: 'Word importance',
+                        xaxis: {
+                            title: 'Tokens',
+                        },
+                        yaxis: {
+                            title: 'Score',
+                        },
+                    }}
+                /> */}
             </div>
 
             <br />
@@ -200,4 +204,3 @@ export default function Search() {
         </React.Fragment>
     );
 }
-
