@@ -25,7 +25,7 @@ import QuestionAnswer from './QuestionAnswer';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="inherit" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 COMS W4995 Applied Deep Learning Spring 2020
@@ -117,6 +117,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -126,6 +128,7 @@ export default function Dashboard() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -136,7 +139,7 @@ export default function Dashboard() {
                 <Toolbar className={classes.toolbar}>
                     <IconButton
                         edge="start"
-                        color="inherit"
+                        color="secondary"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         className={clsx(
@@ -149,11 +152,14 @@ export default function Dashboard() {
                     <Typography
                         component="h1"
                         variant="h6"
-                        color="inherit"
+                        color="secondary"
                         noWrap
                         className={classes.title}
+                        
                     >
-                        COVID Literature Search
+                        <Box fontWeight={700}>
+                            COVID Literature Search
+                        </Box>
                     </Typography>
                     {/* Optional Icon Button on the Top RHS */}
                     {/* <IconButton color="inherit">

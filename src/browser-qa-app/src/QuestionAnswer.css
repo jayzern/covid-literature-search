@@ -26,7 +26,8 @@
 
 #question-form a {
     display: inline-block;
-    background-color: #3f51b5;
+    /* background-color: #3f51b5; */
+    background-color: orange;
     border: none;
     color: white;
     text-align: center;
@@ -64,8 +65,10 @@
 
 .btn-suggestion {
     display: block;
+    /* background-color: white; */
     background-color: white;
-    border: 0.1rem solid #3f51b5;
+    /* border: 0.1rem solid black; */
+    border: 0.1rem solid lightgray;
     text-align: center;
     max-width: 100%;
     margin: 2rem 0;
@@ -88,7 +91,8 @@
 .btn-suggestion > input {
     border: none;
     background-color: transparent;
-    color: #3f51b5;
+    /* color: #3f51b5; */
+    color: default;
     text-align: center;
     font-weight: 500;
     font-size: 0.9rem;

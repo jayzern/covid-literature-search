@@ -157,7 +157,7 @@ export default function QuestionAnswer() {
                 />
                 <div className="btn-wrapper">
                     <Link color="primary" onClick={handleSubmit}>
-                        Search
+                        Enter
                     </Link>
                     <div id="loading" ref={loading}>
                         <CircularProgress
@@ -225,3 +225,4 @@ export default function QuestionAnswer() {
         </React.Fragment>
     );
 }
+
