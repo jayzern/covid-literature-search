@@ -8,7 +8,7 @@ from sentence_transformers import SentenceTransformer
 
 EMBEDDING_FILE = "./data/embeddings-gsarti-covidbert-nli.hdf5"
 LOOKUP_TABLE_FILE = "./data/text_lookup_processed.pkl"
-MODEL_DIR = './model'
+# MODEL_DIR = './model'
 NUM_CLOSEST = 5
 NUM_BATCH_EMBEDDINGS = 4
 
