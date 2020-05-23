@@ -1,4 +1,3 @@
-# References: https://github.com/indrajithi/genquest
 # Installation Instructions:
 # pip install nltk
 # pip install textblob

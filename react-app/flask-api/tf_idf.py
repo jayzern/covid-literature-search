@@ -1,5 +1,3 @@
-# References: https://stevenloria.com/tf-idf/
-
 import math
 from textblob import TextBlob as tb
 
