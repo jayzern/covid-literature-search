@@ -5,12 +5,12 @@ A search engine built using PyTorch (HuggingFace), React.js and Flask. Based on 
 ## Directory
       .
       ├── README.md
-      ├── prepare_embeddings.ipynb # The secret sauce
-      ├── etc/ # Archived notebooks and unused code
+      ├── prepare_embeddings.ipynb        # The secret sauce
+      ├── etc/                            # Archived notebooks and unused code
       ├── doc/
-            └── slides.pdf # Presentation material
-      └── react-app/ # React frontend
-            ├── flask-api # Flask backend; store CovidBERT model here
+            └── slides.pdf                # Presentation material
+      └── react-app/                      # React frontend
+            ├── flask-api                 # Flask backend; store CovidBERT model here
             └── ...
 
 ## How it works in one slide:
