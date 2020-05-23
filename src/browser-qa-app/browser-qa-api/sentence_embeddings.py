@@ -3,7 +3,7 @@ import pickle as pkl
 import torch
 import numpy as np
 import scipy.spatial
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import models, SentenceTransformer
 
 
 EMBEDDING_FILE = "./data/embeddings-gsarti-covidbert-nli.hdf5"
@@ -15,6 +15,8 @@ NUM_BATCH_EMBEDDINGS = 4
 
 class SentenceEmbeddings:
     def __init__(self):
+        # TODO:
+        # Don't use stored model... download using huggingface model instead.
         MODEL_NAME = 'gsarti/covidbert-nli'
         word_embedding_model = models.BERT(MODEL_NAME,
                                            max_seq_length=510,
