@@ -1,5 +1,7 @@
 # Covid Literature Search
 
+Jay Zern Ng, Tim Huang
+
 A search engine built using PyTorch (HuggingFace), React.js and Flask. Based on the COVID-19 Open Research Dataset (CORD-19) by the Allen Institute for AI, with over 29,000 scholarly articles and 13,000+ in full text. (https://allenai.org/)
 
 ## Directory
